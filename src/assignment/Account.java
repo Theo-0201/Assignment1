@@ -1,10 +1,12 @@
 package assignment;
 
+import assignment.AccountType;
+
 public class Account {
 
 	private double loan, rate;
-	public int daysActive, account_Type;
-	public static final int STANDARD = 0, BUDGET = 1, PREMIUM = 2, SUPER_PREMIUM = 3;
+	public int daysActive;
+	public AccountType accountType;
 
 	public double loan() {
 		System.out.println("The loan value is " + this.loan);
@@ -29,7 +31,7 @@ public class Account {
 	}
 
 	public String to_string() {
-		return "Loan: " + this.loan + "; rate: " + this.rate + "; days active:" + daysActive + "; Type: " + account_Type
+		return "Loan: " + this.loan + "; rate: " + this.rate + "; days active:" + daysActive + "; Type: " + accountType
 				+ ";";
 	}
 
@@ -44,13 +46,13 @@ public class Account {
 		int temp = 365;
 		for (int i = 0; i < accounts.length; i++) {
 			account = accounts[i];
-			if (account.account_Type == Account.PREMIUM || account.account_Type == Account.SUPER_PREMIUM)
+			if (account.accountType == AccountType.PREMIUM || account.accountType == AccountType.SUPER_PREMIUM)
 				totalFee += .0125 * (account.loan * Math.pow(account.rate, (account.daysActive / 365)) - account.loan);
 		}
 		return totalFee;
 	}
 
-	public Account(double value, double rate, int account_Type) throws Exception {
+	public Account(double value, double rate, AccountType accountType) throws Exception {
 		if (value < 0)
 			throw new Exception();
 		else {
@@ -61,10 +63,10 @@ public class Account {
 		else {
 			this.rate = rate;
 		}
-		if (account_Type != 0 || account_Type != 1 || account_Type != 2 || account_Type != 3)
+		if (accountType != AccountType.BUDGET || accountType != AccountType.PREMIUM || accountType != AccountType.STANDARD || accountType != AccountType.SUPER_PREMIUM )
 			throw new Exception();
 		else {
-			this.account_Type = account_Type;
+			this.accountType = accountType;
 		}
 	}
 
