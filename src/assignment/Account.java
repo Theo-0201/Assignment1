@@ -2,13 +2,13 @@ package assignment;
 
 public class Account {
 
-	public double	loan_value,rate;	
+	public double loan, rate;	
 	public int	daysActive,account_Type;
 	public static final int	STANDARD=0,BUDGET=1,PREMIUM=2,SUPER_PREMIUM=3;
 	
 	public double loan() {
-		System.out.println("The loan value is " + this.loan_value);
-		return loan_value;
+		System.out.println("The loan value is " + this.loan);
+		return loan;
 	}
 	
 	public double getRate() {
@@ -16,9 +16,8 @@ public class Account {
 		return this.rate;
 	}
 	
-	//must have method - the lead has requested it in all classes
 	public double getMonthlyRate() {
-		return loan_value*rate;
+		return loan*rate;
 	}
 	
 	public void setValue(double value) throws Exception {
@@ -26,12 +25,12 @@ public class Account {
 			throw new Exception();
 		else
 		{
-			loan_value = value;
+			loan = value;
 		}
 	}
 	
 	public String to_string() {
-		return "Loan: "+this.loan_value+"; rate: "+this.rate+"; days active:"+daysActive+"; Type: "+account_Type+";";
+		return "Loan: "+this.loan+"; rate: "+this.rate+"; days active:"+daysActive+"; Type: "+account_Type+";";
 	}
 	
 	public void print() {
@@ -47,8 +46,8 @@ public class Account {
 	for	(int	i=0;i<accounts.length;i++)	{
 	account=accounts[i];
 	if(account.account_Type==Account.PREMIUM||account.account_Type==Account.SUPER_PREMIUM)	
-	totalFee+=.0125	*	(	//	1.25%	broker's	fee
-			account.loan_value*Math.pow(account.rate,(account.daysActive/365)) - account.loan_value);	//	interest-principal
+	totalFee+=.0125	*	(
+			account.loan*Math.pow(account.rate,(account.daysActive/365)) - account.loan);	
 	}
 	return	totalFee;
 	}
@@ -58,7 +57,7 @@ public class Account {
 			throw new Exception();
 		else
 		{
-			loan_value = value;
+			loan = value;
 		}
 		this.rate = rate;
 		this.account_Type = account_Type;
