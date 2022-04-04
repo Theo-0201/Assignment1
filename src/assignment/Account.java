@@ -2,7 +2,7 @@ package assignment;
 
 public class Account {
 
-	public double loan, rate;
+	private double loan, rate;
 	public int daysActive, account_Type;
 	public static final int STANDARD = 0, BUDGET = 1, PREMIUM = 2, SUPER_PREMIUM = 3;
 
