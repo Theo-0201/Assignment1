@@ -56,8 +56,16 @@ public class Account {
 		else {
 			loan = value;
 		}
-		this.rate = rate;
-		this.account_Type = account_Type;
+		if (rate < 0)
+			throw new Exception();
+		else {
+			this.rate = rate;
+		}
+		if (account_Type != 0 || account_Type != 1 || account_Type != 2 || account_Type != 3)
+			throw new Exception();
+		else {
+			this.account_Type = account_Type;
+		}
 	}
 
 }
