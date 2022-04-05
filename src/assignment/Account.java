@@ -1,6 +1,6 @@
 package assignment;
 
-public class Account implements MonthlyRate, Loan {
+public final class Account implements MonthlyRate, Loan {
 
 	private double loan, rate;
 	private int daysActive;
