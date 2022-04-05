@@ -1,8 +1,6 @@
 package assignment;
 
-import assignment.*;
-
-public class Account implements MonthlyRate {
+public class Account implements MonthlyRate, Loan {
 
 	private double loan, rate;
 	private int daysActive;
@@ -10,6 +8,31 @@ public class Account implements MonthlyRate {
 	
 	private static final int DAYS = 365;
 	private static final float BROKER_FEE = 0.0125f;
+	
+	public Account(double value, double rate, int daysActive, AccountType accountType) throws IllegalArgumentException {
+		if (value < 0) {
+			throw new IllegalArgumentException();
+		}
+		else {
+			loan = value;
+		}
+		if (rate < 0) {
+			throw new IllegalArgumentException();
+		}
+		else {
+			this.rate = rate;
+		}
+		if (daysActive < 0) {
+			throw new IllegalArgumentException();
+		} else {
+			this.daysActive = daysActive;
+		}
+		if (accountType != AccountType.BUDGET || accountType != AccountType.PREMIUM || accountType != AccountType.STANDARD || accountType != AccountType.SUPER_PREMIUM )
+			throw new IllegalArgumentException();
+		else {
+			this.accountType = accountType;
+		}
+	}
 
 	public double getLoan() {
 		return loan;
@@ -106,29 +129,9 @@ public class Account implements MonthlyRate {
 		return false;
 	}
 
-	public Account(double value, double rate, int daysActive, AccountType accountType) throws IllegalArgumentException {
-		if (value < 0) {
-			throw new IllegalArgumentException();
-		}
-		else {
-			loan = value;
-		}
-		if (rate < 0) {
-			throw new IllegalArgumentException();
-		}
-		else {
-			this.rate = rate;
-		}
-		if (daysActive < 0) {
-			throw new IllegalArgumentException();
-		} else {
-			this.daysActive = daysActive;
-		}
-		if (accountType != AccountType.BUDGET || accountType != AccountType.PREMIUM || accountType != AccountType.STANDARD || accountType != AccountType.SUPER_PREMIUM )
-			throw new IllegalArgumentException();
-		else {
-			this.accountType = accountType;
-		}
+	@Override
+	public void printLoan() {
+		System.out.println("The loan has a value of " + this.getLoan());
 	}
 
 }
