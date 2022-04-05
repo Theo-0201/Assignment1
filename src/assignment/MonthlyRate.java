@@ -2,6 +2,6 @@ package assignment;
 
 public interface MonthlyRate {
 	
-	public double getMonthlyRate();
+	public abstract double getMonthlyRate();
 
 }

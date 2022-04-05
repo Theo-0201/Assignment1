@@ -83,7 +83,7 @@ public class Account implements MonthlyRate {
 		return builder.toString();
 	}
 
-	public static double calculate(Account[] accounts) throws NullPointerException {
+	public static double calculateTotalFee(Account[] accounts) throws NullPointerException {
 		double totalFee = 0.0;
 		Account account;
 		if(accounts == null) {
@@ -91,11 +91,19 @@ public class Account implements MonthlyRate {
 		} else {
 			for (int i = 0; i < accounts.length; i++) {
 				account = accounts[i];
-				if (account.accountType == AccountType.PREMIUM || account.accountType == AccountType.SUPER_PREMIUM)
+				if (account.isPremium()) {
 					totalFee += BROKER_FEE * (account.loan * Math.pow(account.rate, (account.daysActive / DAYS)) - account.loan);
+				}
 			}
 		}
 		return totalFee;
+	}
+	
+	public boolean isPremium() {
+		if (this.accountType == AccountType.PREMIUM || this.accountType == AccountType.SUPER_PREMIUM) {
+			return true;
+		}
+		return false;
 	}
 
 	public Account(double value, double rate, int daysActive, AccountType accountType) throws IllegalArgumentException {
