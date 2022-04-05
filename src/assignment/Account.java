@@ -5,8 +5,11 @@ import assignment.AccountType;
 public class Account {
 
 	private double loan, rate;
-	public int daysActive;
+	public int daysActive; //all attr private! + accessor methods
 	public AccountType accountType;
+	
+	private static final int DAYS = 365;
+	private static final float BROKER_FEE = 0.0125f;
 
 	public double loan() {
 		System.out.println("The loan value is " + this.loan);
@@ -38,11 +41,11 @@ public class Account {
 	public static double calculate(Account[] accounts) {
 		double totalFee = 0.0;
 		Account account;
-		int temp = 365;
+		//check if accounts is not null
 		for (int i = 0; i < accounts.length; i++) {
 			account = accounts[i];
 			if (account.accountType == AccountType.PREMIUM || account.accountType == AccountType.SUPER_PREMIUM)
-				totalFee += .0125 * (account.loan * Math.pow(account.rate, (account.daysActive / 365)) - account.loan);
+				totalFee += BROKER_FEE * (account.loan * Math.pow(account.rate, (account.daysActive / DAYS)) - account.loan);
 		}
 		return totalFee;
 	}
