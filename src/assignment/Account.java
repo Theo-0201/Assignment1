@@ -5,32 +5,62 @@ import assignment.AccountType;
 public class Account {
 
 	private double loan, rate;
-	public int daysActive; //all attr private! + accessor methods
-	public AccountType accountType;
+	private int daysActive;
+	private AccountType accountType;
 	
 	private static final int DAYS = 365;
 	private static final float BROKER_FEE = 0.0125f;
 
-	public double loan() {
-		System.out.println("The loan value is " + this.loan);
+	public double getLoan() {
 		return loan;
 	}
 
 	public double getRate() {
-		System.out.println("The rate is " + rate);
-		return this.rate;
+		return rate;
 	}
-
-	public double getMonthlyRate() {
-		return loan * rate;
+	
+	public int getDaysActive() {
+		return daysActive;
 	}
-
-	public void setValue(double value) throws Exception {
+	
+	public AccountType getAccountType() {
+		return accountType;
+	}
+	
+	public void setLoan(double value) throws Exception {
 		if (value < 0)
 			throw new Exception();
 		else {
 			loan = value;
 		}
+	}
+
+	public void setRate(double value) throws Exception {
+		if (value < 0)
+			throw new Exception();
+		else {
+			rate = value;
+		}
+	}
+	
+	public void setDaysActive(int value) throws Exception {
+		if (value < 0)
+			throw new Exception();
+		else {
+			daysActive = value;
+		}
+	}
+	
+	public void setAccountType(AccountType accountType) throws Exception {
+		if (accountType != AccountType.BUDGET || accountType != AccountType.PREMIUM || accountType != AccountType.STANDARD || accountType != AccountType.SUPER_PREMIUM)
+			throw new Exception();
+		else {
+			this.accountType = accountType;
+		}
+	}
+	
+	public double getMonthlyRate() {
+		return loan * rate;
 	}
 
 	@Override
