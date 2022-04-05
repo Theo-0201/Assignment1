@@ -1,8 +1,8 @@
 package assignment;
 
-import assignment.AccountType;
+import assignment.*;
 
-public class Account {
+public class Account implements MonthlyRate {
 
 	private double loan, rate;
 	private int daysActive;
@@ -62,7 +62,8 @@ public class Account {
 			this.accountType = accountType;
 		}
 	}
-	
+
+	@Override
 	public double getMonthlyRate() {
 		return loan * rate;
 	}
