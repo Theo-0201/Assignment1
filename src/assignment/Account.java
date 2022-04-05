@@ -27,33 +27,37 @@ public class Account {
 		return accountType;
 	}
 	
-	public void setLoan(double value) throws Exception {
-		if (value < 0)
-			throw new Exception();
+	public void setLoan(double value) throws IllegalArgumentException {
+		if (value < 0) {
+			throw new IllegalArgumentException();
+		}
 		else {
 			loan = value;
 		}
 	}
 
-	public void setRate(double value) throws Exception {
-		if (value < 0)
-			throw new Exception();
+	public void setRate(double value) throws IllegalArgumentException {
+		if (value < 0) {
+			throw new IllegalArgumentException();
+		}
 		else {
 			rate = value;
 		}
 	}
 	
-	public void setDaysActive(int value) throws Exception {
-		if (value < 0)
-			throw new Exception();
+	public void setDaysActive(int value) throws IllegalArgumentException {
+		if (value < 0) {
+			throw new IllegalArgumentException();
+		}
 		else {
 			daysActive = value;
 		}
 	}
 	
-	public void setAccountType(AccountType accountType) throws Exception {
-		if (accountType != AccountType.BUDGET || accountType != AccountType.PREMIUM || accountType != AccountType.STANDARD || accountType != AccountType.SUPER_PREMIUM)
-			throw new Exception();
+	public void setAccountType(AccountType accountType) throws IllegalArgumentException {
+		if (accountType != AccountType.BUDGET || accountType != AccountType.PREMIUM || accountType != AccountType.STANDARD || accountType != AccountType.SUPER_PREMIUM) {
+			throw new IllegalArgumentException();
+		}
 		else {
 			this.accountType = accountType;
 		}
@@ -78,31 +82,41 @@ public class Account {
 		return builder.toString();
 	}
 
-	public static double calculate(Account[] accounts) {
+	public static double calculate(Account[] accounts) throws NullPointerException {
 		double totalFee = 0.0;
 		Account account;
-		//check if accounts is not null
-		for (int i = 0; i < accounts.length; i++) {
-			account = accounts[i];
-			if (account.accountType == AccountType.PREMIUM || account.accountType == AccountType.SUPER_PREMIUM)
-				totalFee += BROKER_FEE * (account.loan * Math.pow(account.rate, (account.daysActive / DAYS)) - account.loan);
+		if(accounts == null) {
+			throw new NullPointerException();
+		} else {
+			for (int i = 0; i < accounts.length; i++) {
+				account = accounts[i];
+				if (account.accountType == AccountType.PREMIUM || account.accountType == AccountType.SUPER_PREMIUM)
+					totalFee += BROKER_FEE * (account.loan * Math.pow(account.rate, (account.daysActive / DAYS)) - account.loan);
+			}
 		}
 		return totalFee;
 	}
 
-	public Account(double value, double rate, AccountType accountType) throws Exception {
-		if (value < 0)
-			throw new Exception();
+	public Account(double value, double rate, int daysActive, AccountType accountType) throws IllegalArgumentException {
+		if (value < 0) {
+			throw new IllegalArgumentException();
+		}
 		else {
 			loan = value;
 		}
-		if (rate < 0)
-			throw new Exception();
+		if (rate < 0) {
+			throw new IllegalArgumentException();
+		}
 		else {
 			this.rate = rate;
 		}
+		if (daysActive < 0) {
+			throw new IllegalArgumentException();
+		} else {
+			this.daysActive = daysActive;
+		}
 		if (accountType != AccountType.BUDGET || accountType != AccountType.PREMIUM || accountType != AccountType.STANDARD || accountType != AccountType.SUPER_PREMIUM )
-			throw new Exception();
+			throw new IllegalArgumentException();
 		else {
 			this.accountType = accountType;
 		}
