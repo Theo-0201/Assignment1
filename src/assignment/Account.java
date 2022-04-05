@@ -33,9 +33,19 @@ public class Account {
 		}
 	}
 
-	public String to_string() {
-		return "Loan: " + this.loan + "; rate: " + this.rate + "; days active:" + daysActive + "; Type: " + accountType
-				+ ";";
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Account [loan=");
+		builder.append(loan);
+		builder.append(", rate=");
+		builder.append(rate);
+		builder.append(", daysActive=");
+		builder.append(daysActive);
+		builder.append(", accountType=");
+		builder.append(accountType);
+		builder.append("]");
+		return builder.toString();
 	}
 
 	public static double calculate(Account[] accounts) {
